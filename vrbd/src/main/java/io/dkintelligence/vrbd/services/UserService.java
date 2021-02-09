@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Locale;
+
 @Service
 public class UserService {
 
@@ -20,6 +22,7 @@ public class UserService {
             newUser.setPassword(bCryptPasswordEncoder.encode(newUser.getPassword()));
 //             Username has to be unique (exception)
             newUser.setUsername(newUser.getUsername());
+            newUser.setRole(newUser.getRole().toUpperCase());
 
 //        Make sure that password and confirmPassword match
 //        We don't persist or show the confirm password
