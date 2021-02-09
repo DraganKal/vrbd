@@ -70,7 +70,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/**/*.css",
                         "/**/*.js"
                 ).permitAll()
-                .antMatchers(SIGN_UP_URLS).permitAll()
+                .antMatchers("/api/users/login").permitAll()
+                .antMatchers("/api/users/register").permitAll()
                 .antMatchers(H2_URL).permitAll()
 //               .antMatchers("/api/messages/received").hasAuthority("RECEIVED")
 //               .antMatchers("/api/messages/sent").hasAuthority("SENT")

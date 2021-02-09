@@ -1,6 +1,6 @@
 import axios from "axios";
 import jwt_decode from "jwt-decode";
-import { GET_ERRORS, SET_CURRENT_USER } from "./types";
+import { GET_ERRORS, GET_USER, SET_CURRENT_USER } from "./types";
 import setJWTToken from "../securityUtils/SetJWTToken";
 
 export const createNewUser = (newUser, history) => async (dispatch) => {
@@ -51,4 +51,32 @@ export const logout = () => (dispatch) => {
     type: SET_CURRENT_USER,
     payload: {},
   });
+};
+
+export const getUser = (id, history) => async (dispatch) => {
+  try {
+    const res = await axios.get(`/api/users/${id}`);
+    dispatch({
+      type: GET_USER,
+      payload: res.data,
+    });
+  } catch (error) {
+    history.push("/home");
+  }
+};
+
+export const updateUser = (id, newUser, history) => async (dispatch) => {
+  try {
+    await axios.post(`/api/users/${id}/update`, newUser);
+    history.push("/home");
+    dispatch({
+      type: GET_ERRORS,
+      payload: {},
+    });
+  } catch (err) {
+    dispatch({
+      type: GET_ERRORS,
+      payload: err.response.data,
+    });
+  }
 };

@@ -23,26 +23,30 @@ class Header extends Component {
           </li>
           <li className="nav-item">
             <Link className="nav-link" to="">
-              Send a New Message
+              Apartments
             </Link>
           </li>
           <li className="nav-item">
             <Link className="nav-link" to="">
-              Received Messages
+              Hosts
             </Link>
           </li>
           <li className="nav-item">
             <Link className="nav-link" to="">
-              Sent Messages
+              Users
             </Link>
           </li>
 
           <li className="nav-item">
             <Link className="nav-link" to="">
-              Archived Messages
+              Rent Apartment
             </Link>
           </li>
-
+          <li className="nav-item">
+            <Link className="nav-link " to={`/profile/${user.id}`}>
+              <i className="fas fa-user-circle mr-1">{user.name}</i>
+            </Link>
+          </li>
           <li className="nav-item">
             <Link
               className="nav-link btn btn-danger text-white"

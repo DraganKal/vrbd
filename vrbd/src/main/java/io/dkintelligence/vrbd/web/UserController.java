@@ -16,12 +16,11 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+
+import java.security.Principal;
 
 import static io.dkintelligence.vrbd.security.SecurityConstants.TOKEN_PREFIX;
 
@@ -64,6 +63,21 @@ public class UserController {
         String jwt = TOKEN_PREFIX + tokenProvider.generateToken(authentication);
         return ResponseEntity.ok(new JWTLoginSuccessResponse(true, jwt));
 
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getUserById(@PathVariable String id, Principal principal){
+        User user = userService.getUserById(Long.parseLong(id), principal.getName());
+        return new ResponseEntity<>(user, HttpStatus.OK);
+    }
+
+    @PostMapping("/{id}/update")
+    public ResponseEntity<?> updateUser(@PathVariable Long id, @RequestBody User update,BindingResult result,  Principal principal){
+        ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
+        if(errorMap != null)return errorMap;
+        User user = userService.updateUser(id, update, principal.getName());
+
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
 }

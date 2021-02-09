@@ -13,6 +13,8 @@ import Login from "./components/userManagement/Login";
 import { SET_CURRENT_USER } from "./actions/types";
 import { logout } from "./actions/SecurityActions";
 import Footer from "./components/Layout/Footer";
+import SecureRoute from "./securityUtils/SecureRoute";
+import UserProfile from "./components/userManagement/UserProfile";
 
 const jwtToken = localStorage.jwtToken;
 if (jwtToken) {
@@ -46,7 +48,9 @@ class App extends Component {
             {
               //Private Routes
             }
-            <Switch></Switch>
+            <Switch>
+              <SecureRoute exact path="/profile/:id" component={UserProfile} />
+            </Switch>
           </div>
           <Footer />
         </Router>
