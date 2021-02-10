@@ -1,8 +1,11 @@
 package io.dkintelligence.vrbd.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,20 +17,21 @@ public class Apartment {
     private Long id;
     @NotBlank(message = "Type is required")
     private String type;   // apartment or room
-    @NotBlank(message = "Number of rooms is required")
+    @NotNull(message = "Number of rooms is required")
     private int numberOfRooms;
-    @NotBlank(message = "Number of guests is required")
+    @NotNull(message = "Number of guests is required")
     private int numberOfGuests;
     @ManyToOne(fetch = FetchType.EAGER)
     private Location location;
 //  TO DO Dates for renting
 //  TO DO Available dates
     @ManyToOne(fetch=FetchType.EAGER)
+    @JsonIgnore
     private User host;
     @OneToMany(mappedBy="apartment", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
     private List<Comment> comments = new ArrayList<>();
 //  TO DO Pictures
-    @NotBlank(message = "Price per night is required")
+    @NotNull(message = "Price per night is required")
     private double pricePerNight;
 //  TO DO  check-in time
 //  TO DO  check-out time

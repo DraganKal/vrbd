@@ -68,7 +68,8 @@ export const getUser = (id, history) => async (dispatch) => {
 export const updateUser = (id, newUser, history) => async (dispatch) => {
   try {
     await axios.post(`/api/users/${id}/update`, newUser);
-    history.push("/home");
+    // history.push("/home");
+    window.location.reload();
     dispatch({
       type: GET_ERRORS,
       payload: {},

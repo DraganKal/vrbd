@@ -38,6 +38,7 @@ public class User implements UserDetails {
     private Date updated_At;
 //  If User is host
     @OneToMany(mappedBy="host", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+    @JsonIgnore
     private List<Apartment> apartmentsForRent = new ArrayList<>();
 //   If User is guest
     @ManyToMany(fetch = FetchType.LAZY,

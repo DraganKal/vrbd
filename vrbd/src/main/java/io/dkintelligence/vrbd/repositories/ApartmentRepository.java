@@ -6,4 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ApartmentRepository extends JpaRepository<Apartment, Long> {
+
+    Iterable<Apartment> findAllByHostUsername(String username);
+
 }

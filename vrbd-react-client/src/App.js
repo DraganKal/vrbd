@@ -15,6 +15,7 @@ import { logout } from "./actions/SecurityActions";
 import Footer from "./components/Layout/Footer";
 import SecureRoute from "./securityUtils/SecureRoute";
 import UserProfile from "./components/userManagement/UserProfile";
+import MyApartments from "./components/Apartment/MyApartments";
 
 const jwtToken = localStorage.jwtToken;
 if (jwtToken) {
@@ -50,6 +51,11 @@ class App extends Component {
             }
             <Switch>
               <SecureRoute exact path="/profile/:id" component={UserProfile} />
+              <SecureRoute
+                exact
+                path="/myApartments"
+                component={MyApartments}
+              />
             </Switch>
           </div>
           <Footer />

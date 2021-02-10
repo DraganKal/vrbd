@@ -74,6 +74,7 @@ class UserProfile extends Component {
                 <p className="lead text-center">Update your Account</p>
                 <form onSubmit={this.onSubmit}>
                   <div className="form-group">
+                    Username (Email):
                     <input
                       type="email"
                       className={classnames("form-control form-control-lg", {
@@ -92,6 +93,7 @@ class UserProfile extends Component {
                     )}
                   </div>
                   <div className="form-group">
+                    Name:
                     <input
                       type="text"
                       className={classnames("form-control form-control-lg", {
@@ -107,6 +109,7 @@ class UserProfile extends Component {
                     )}
                   </div>
                   <div className="form-group">
+                    Surname:
                     <input
                       type="text"
                       className={classnames("form-control form-control-lg", {
@@ -140,9 +143,10 @@ class UserProfile extends Component {
                       name="role"
                       value={this.state.role}
                       onChange={this.onChange}
+                      disabled
                     >
-                      <option value={"host"}>Host</option>
-                      <option value={"guest"}>Guest</option>
+                      <option value={"HOST"}>Host</option>
+                      <option value={"GUEST"}>Guest</option>
                     </select>
                   </div>
 

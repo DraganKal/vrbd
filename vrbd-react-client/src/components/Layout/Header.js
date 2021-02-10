@@ -13,7 +13,52 @@ class Header extends Component {
   render() {
     const { validToken, user } = this.props.security;
 
-    const userIsAuthenticated = (
+    const userIsHost = (
+      <div className="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul className="navbar-nav ml-auto topnav">
+          <li className="nav-item active">
+            <Link className="nav-link" to="/home">
+              Home <span className="sr-only">(current)</span>
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link className="nav-link" to="/myApartments">
+              My Apartments
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link className="nav-link" to="">
+              Reservations
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link className="nav-link" to="">
+              My Guests
+            </Link>
+          </li>
+
+          <li className="nav-item active">
+            <Link className="nav-link " to={`/profile/${user.id}`}>
+              <i className="fas fa-user-circle mr-1">{user.name}</i>
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link
+              className="nav-link btn btn-danger text-white"
+              type="button"
+              to="/logout"
+              data-toggle="modal"
+              data-target="#myModal"
+              onClick={this.logout.bind(this)}
+            >
+              Logout
+            </Link>
+          </li>
+        </ul>
+      </div>
+    );
+
+    const userIsGuest = (
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
         <ul className="navbar-nav ml-auto topnav">
           <li className="nav-item active">
@@ -23,26 +68,11 @@ class Header extends Component {
           </li>
           <li className="nav-item">
             <Link className="nav-link" to="">
-              Apartments
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="">
-              Hosts
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="">
-              Users
+              All Apartments
             </Link>
           </li>
 
-          <li className="nav-item">
-            <Link className="nav-link" to="">
-              Rent Apartment
-            </Link>
-          </li>
-          <li className="nav-item">
+          <li className="nav-item active">
             <Link className="nav-link " to={`/profile/${user.id}`}>
               <i className="fas fa-user-circle mr-1">{user.name}</i>
             </Link>
@@ -109,8 +139,10 @@ class Header extends Component {
 
     let headerLinks;
 
-    if (validToken && user) {
-      headerLinks = userIsAuthenticated;
+    if (validToken && user && user.role === "HOST") {
+      headerLinks = userIsHost;
+    } else if (validToken && user && user.role === "GUEST") {
+      headerLinks = userIsGuest;
     } else {
       headerLinks = userIsNotAuthenticated;
     }
