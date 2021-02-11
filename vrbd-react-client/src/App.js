@@ -16,6 +16,8 @@ import Footer from "./components/Layout/Footer";
 import SecureRoute from "./securityUtils/SecureRoute";
 import UserProfile from "./components/userManagement/UserProfile";
 import MyApartments from "./components/Apartment/MyApartments";
+import SecuredRouteHost from "./securityUtils/SecuredRouteHost";
+import AddApartment from "./components/Apartment/AddApartment";
 
 const jwtToken = localStorage.jwtToken;
 if (jwtToken) {
@@ -51,10 +53,15 @@ class App extends Component {
             }
             <Switch>
               <SecureRoute exact path="/profile/:id" component={UserProfile} />
-              <SecureRoute
+              <SecuredRouteHost
                 exact
                 path="/myApartments"
                 component={MyApartments}
+              />
+              <SecuredRouteHost
+                exact
+                path="/addApartment"
+                component={AddApartment}
               />
             </Switch>
           </div>

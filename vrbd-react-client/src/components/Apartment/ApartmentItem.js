@@ -19,9 +19,9 @@ class ApartmentItem extends Component {
               <br />
               Price per night: {apartment.pricePerNight}
             </p>
-            <a href="#" className="btn btn-primary">
+            <Link to="/" className="btn btn-primary">
               Go somewhere
-            </a>
+            </Link>
           </div>
         </div>
       </div>
